@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Banking Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Open Banking Platform</h1>
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Open Banking Platform</a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Welcome to Open Banking</h2>
+            <p>Manage all your bank accounts in one place. View balances, track expenses, and never miss a payment.</p>
+            <a href="register.html" class="cta-button">Get Started</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Open Banking Platform</p>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('nav-active');
+        });
+    </script>
+</body>
+</html>

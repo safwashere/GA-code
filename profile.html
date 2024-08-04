@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Open Banking Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Open Banking Platform</h1>
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Open Banking Platform</a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Profile</h2>
+            <div class="profile-info">
+                <h3>Your Profile Information</h3>
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Email:</strong> johndoe@example.com</p>
+                <p><strong>Phone:</strong> (123) 456-7890</p>
+                <button onclick="editProfile()">Edit Profile</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Open Banking Platform</p>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('nav-active');
+        });
+
+        function editProfile() {
+            alert('Edit profile functionality coming soon!');
+        }
+    </script>
+</body>
+</html>
