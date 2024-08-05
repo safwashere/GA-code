@@ -58,7 +58,7 @@
 
             <div class="notifications">
                 <h3>Notifications</h3>
-                <p id="notificationText">Loading...</p>
+                <div id="notificationContainer"></div>
             </div>
         </section>
     </main>
@@ -72,9 +72,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         const accounts = [
-            { name: 'Bank Account 1', balance: '$5,000' },
-            { name: 'Bank Account 2', balance: '$2,300' },
-            { name: 'Credit Card 1', balance: '$1,200', dueDate: '30th July' }
+            { name: 'OCBC 360', balance: '$3,000' },
+            { name: 'DBS savings', balance: '$8,200' },
+            { name: 'Credit Card 1', balance: '$1,200', dueDate: '15th August' },
+            { name: 'Student Loans', balance: '$600', dueDate: '25th August' },
+            { name: 'Utilities', balance: '$250', dueDate: '10th August' }
         ];
 
         function renderAccounts() {
@@ -128,9 +130,31 @@
         });
 
         function fetchNotifications() {
-            // Example notification
-            const notifications = "No upcoming payments.";
-            document.getElementById('notificationText').textContent = notifications;
+            // Example notifications
+            const notifications = [
+                "[REMINDER] Credit card payment coming up in 1 week.",
+                "[REMINDER] Utilities payment due in 5 days.",
+                "[ALERT] Low balance on your savings account.",
+                "[NOTICE] New statement available for your student l"
+            
+                
+            ];
+
+            const notificationContainer = document.getElementById('notificationContainer');
+            notificationContainer.innerHTML = ''; // Clear existing notifications
+
+            notifications.forEach(notification => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+                alertDiv.setAttribute('role', 'alert');
+                alertDiv.innerHTML = `
+                    ${notification}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                `;
+                notificationContainer.appendChild(alertDiv);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function() {

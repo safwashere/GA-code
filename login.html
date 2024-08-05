@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .form-group img {
-            max-width: 150px; /* Set the maximum width for the image */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 150px; 
+            height: auto; 
         }
     </style>
 </head>
@@ -63,23 +63,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('nav-active');
-        });
-
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form from submitting normally
+            console.log('Form submitted'); // Ensure form submission event is triggered
 
             // Simulate login validation
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Simple validation for demonstration purposes
+            console.log("Email: ", email); // Debugging
+            console.log("Password: ", password); // Debugging
+
             if (email === "saf@gmail.com" && password === "passwordsaf") {
-                // Simulate successful login
+                console.log('Login successful'); // Ensure condition is met
                 alert('Login successful! Redirecting to dashboard...');
                 window.location.href = 'dashboard.html'; // Redirect to dashboard
             } else {
+                console.log('Invalid email or password'); // Ensure invalid login is caught
                 alert('Invalid email or password.');
             }
         });
