@@ -65,14 +65,14 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form from submitting normally
-            console.log('Form submitted'); // Ensure form submission event is triggered
+            console.log('Form submitted'); // makes sure submission is submitted
 
             // Simulate login validation
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            console.log("Email: ", email); // Debugging
-            console.log("Password: ", password); // Debugging
+            console.log("Email: ", email); 
+            console.log("Password: ", password); 
 
             if (email === "saf@gmail.com" && password === "passwordsaf") {
                 console.log('Login successful'); // Ensure condition is met

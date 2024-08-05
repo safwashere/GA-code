@@ -33,7 +33,7 @@
             <div class="account-summary mb-4">
                 <h3>Your Accounts</h3>
                 <ul id="accountList" class="list-group">
-                    <!-- Account data will be dynamically inserted here -->
+                    
                 </ul>
             </div>
 
@@ -135,13 +135,13 @@
                 "[REMINDER] Credit card payment coming up in 1 week.",
                 "[REMINDER] Utilities payment due in 5 days.",
                 "[ALERT] Low balance on your savings account.",
-                "[NOTICE] New statement available for your student l"
+                "[NOTICE] New statement available for your student loans"
             
                 
             ];
 
             const notificationContainer = document.getElementById('notificationContainer');
-            notificationContainer.innerHTML = ''; // Clear existing notifications
+            notificationContainer.innerHTML = ''; // delete notifications
 
             notifications.forEach(notification => {
                 const alertDiv = document.createElement('div');
