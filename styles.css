@@ -16,32 +16,75 @@ header {
 header h1 {
     margin: 0;
 }
-
-nav {
-    margin: 0;
-    padding: 0;
+/* Basic styles for the navigation bar */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 1rem;
-}
-
-nav ul li a {
-    color: #fff;
+.nav-logo {
+    font-size: 24px;
     text-decoration: none;
-    font-weight: bold;
+    color: #333;
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
+.nav-menu {
+    display: flex;
+    gap: 15px;
 }
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+}
+
+.nav-menu a:hover {
+    background-color: #f4f4f4;
+    border-radius: 4px;
+}
+
+.nav-toggle {
+    display: none; /* Hide toggle by default */
+    flex-direction: column;
+    gap: 3px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+}
+
+/* Show the menu in mobile view */
+.nav-active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-menu.nav-active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+}
+
 
 footer {
     background-color: #007BFF;

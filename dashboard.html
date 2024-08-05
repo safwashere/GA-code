@@ -4,55 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Open Banking Platform</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Open Banking Platform</h1>
-        <nav>
-            <div class="nav-container">
-                <a href="index.html" class="nav-logo">Open Banking Platform</a>
-                <div class="nav-menu" id="navMenu">
-                    <a href="index.html">Home</a>
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="login.html">Login</a>
-                    <a href="register.html">Register</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                <button class="nav-toggle" id="navToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="index.html">Open Banking Platform</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                </ul>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main class="container mt-5 pt-5">
         <section>
-            <h2>Dashboard</h2>
-            <div class="account-summary">
+            <h2 class="mb-4">Dashboard</h2>
+            <div class="account-summary mb-4">
                 <h3>Your Accounts</h3>
-                <ul>
-                    <li>Bank Account 1: $5,000</li>
-                    <li>Bank Account 2: $2,300</li>
-                    <li>Credit Card 1: $1,200 (Due Date: 30th July)</li>
+                <ul id="accountList" class="list-group">
+                    <!-- Account data will be dynamically inserted here -->
                 </ul>
             </div>
+
+            <div class="add-account mb-4">
+                <h3>Add New Account</h3>
+                <form id="addAccountForm">
+                    <div class="form-group">
+                        <label for="accountName">Account Name:</label>
+                        <input type="text" id="accountName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountBalance">Balance:</label>
+                        <input type="text" id="accountBalance" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountDueDate">Due Date (optional):</label>
+                        <input type="text" id="accountDueDate" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Account</button>
+                </form>
+            </div>
+
             <div class="notifications">
                 <h3>Notifications</h3>
-                <p>No upcoming payments.</p>
+                <p id="notificationText">Loading...</p>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="bg-dark text-white text-center py-3">
         <p>&copy; Open Banking Platform</p>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('nav-active');
+        const accounts = [
+            { name: 'Bank Account 1', balance: '$5,000' },
+            { name: 'Bank Account 2', balance: '$2,300' },
+            { name: 'Credit Card 1', balance: '$1,200', dueDate: '30th July' }
+        ];
+
+        function renderAccounts() {
+            const accountList = document.getElementById('accountList');
+            accountList.innerHTML = ''; // Clear existing accounts
+
+            accounts.forEach((account, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                listItem.innerHTML = `
+                    ${account.name}: ${account.balance}${account.dueDate ? ' (Due Date: ' + account.dueDate + ')' : ''}
+                    <div>
+                        <button class="btn btn-warning btn-sm ml-2" onclick="editAccount(${index})">Edit</button>
+                        <button class="btn btn-danger btn-sm ml-2" onclick="deleteAccount(${index})">Delete</button>
+                    </div>
+                `;
+                accountList.appendChild(listItem);
+            });
+        }
+
+        function addAccount(name, balance, dueDate) {
+            accounts.push({ name, balance, dueDate });
+            renderAccounts();
+        }
+
+        function editAccount(index) {
+            const newName = prompt('Enter new account name:', accounts[index].name);
+            const newBalance = prompt('Enter new balance:', accounts[index].balance);
+            const newDueDate = prompt('Enter new due date (optional):', accounts[index].dueDate || '');
+
+            if (newName !== null && newBalance !== null) {
+                accounts[index] = { name: newName, balance: newBalance, dueDate: newDueDate };
+                renderAccounts();
+            }
+        }
+
+        function deleteAccount(index) {
+            if (confirm('Are you sure you want to delete this account?')) {
+                accounts.splice(index, 1);
+                renderAccounts();
+            }
+        }
+
+        document.getElementById('addAccountForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('accountName').value;
+            const balance = document.getElementById('accountBalance').value;
+            const dueDate = document.getElementById('accountDueDate').value;
+            addAccount(name, balance, dueDate);
+            document.getElementById('addAccountForm').reset();
+        });
+
+        function fetchNotifications() {
+            // Example notification
+            const notifications = "No upcoming payments.";
+            document.getElementById('notificationText').textContent = notifications;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAccounts();
+            fetchNotifications();
         });
     </script>
 </body>
